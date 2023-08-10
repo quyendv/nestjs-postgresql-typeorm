@@ -24,7 +24,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           migrationsDir: '@modules/database/migrations',
         },
         // subscribers: ['@modules/**/subscribers/*.ts'],
-        synchronize: false, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
+        synchronize: true, // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
         autoLoadEntities: true, // every entity registered through the forFeature() method will be automatically added to the entities array of the configuration object. -> See more: https://docs.nestjs.com/techniques/database#auto-load-entities
       }),
     }),

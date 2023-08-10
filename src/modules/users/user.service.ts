@@ -20,25 +20,27 @@ export class UserService {
 
   findAll(): Promise<User[]> {
     return this.userRepository.find({
-      loadRelationIds: true, // true nếu lấy ra id của profile trong user (mặc định k có), nếu bật relation thì cái này k quan trọng => Trong db là cột 'profileId' nhưng result lại là 'profile'
-      // where: { id: 1 },
+      // loadRelationIds: true, // true nếu lấy ra id của profile trong user (mặc định k có), nếu bật cùng relation thì cái này sẽ conflict và chỉ lấy id => Trong db là cột 'profileId' nhưng result lại là 'profile'
+      // where: { id: 1 }, // đổi dạng id sang uuid
       // where: { id: In([1, 2, 3, 4, 5]), name: 'Joe Smith', profile: { gender: 'male' } }, // AND
-      where: [
-        // OR each conditionObj
-        { name: 'Joe Smith' },
-        { name: 'Joe Smith1' },
-      ],
-      select: ['id', 'name', 'profile'],
-      // relations: ['profile'],
+      // where: [
+      //   // OR each conditionObj
+      //   { name: 'Joe Smith' },
+      //   { name: 'Joe Smith1' },
+      // ],
+      // select: ['id', 'name', 'profile', 'createdAt', 'updatedAt'],
+      // relations: ['profile'], // không nên bật cùng loadRelationIds
       relations: { profile: true },
+      // withDeleted: true, // mặc định là false, không lấy những phần tử softDelete/softRemove, bật true nếu vẫn lấy
     });
   }
 
-  findOne(id: number): Promise<User | null> {
+  findOne(id: string): Promise<User | null> {
     return this.userRepository.findOneBy({ id });
   }
 
-  remove(id: number): Promise<DeleteResult> {
-    return this.userRepository.delete(id);
+  remove(id: string): Promise<DeleteResult> {
+    // return this.userRepository.delete(id); // Phân biệt delete (xóa theo id, [id], conditions), remove (xóa theo entity, [entity]): https://stackoverflow.com/questions/54246615/what-s-the-difference-between-remove-and-delete
+    return this.userRepository.softDelete(id);
   }
 }
