@@ -1,18 +1,21 @@
+import { envConfig } from '@configs/env.config';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { appConfig } from './configs/app.config';
-import { databaseConfig } from './configs/database.config';
-import { DatabaseModule } from './modules/database.module';
+import { DatabaseModule } from './modules/database/database.module';
+import { ProfileModule } from './modules/profiles/profile.module';
+import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [databaseConfig, appConfig],
+      load: [envConfig],
       isGlobal: true,
       cache: true,
       expandVariables: true,
     }),
     DatabaseModule,
+    UserModule,
+    ProfileModule,
   ],
 })
 export class AppModule {}
