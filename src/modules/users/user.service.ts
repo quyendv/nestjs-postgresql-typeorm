@@ -8,13 +8,55 @@ import { User } from './entities/user.entity';
 export class UserService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
-  create(userData: DeepPartial<User>): Promise<User> {
+  async create(userData: DeepPartial<User>): Promise<User> {
     const profile = new Profile();
     profile.gender = 'male';
     profile.photo = 'me.jpg';
     const newUser = new User();
     newUser.name = 'Joe Smith';
     newUser.profile = profile;
+
+    // *** Some api: see more at https://typeorm.io/repository-api and https://typeorm.io/repository-api#additional-options
+    // create instances
+    const user1 = this.userRepository.create(); // same as const user = new User();
+    const user2 = this.userRepository.create({ id: 'some-uuid-v4', name: 'hello' }); // same as const user = new User(); user.firstName = "Timber"; user.lastName = "Saw";
+    const userList = this.userRepository.create([
+      { id: 'key1', name: 'value1' },
+      { id: 'key2', name: 'value2' },
+      // ...
+    ]);
+
+    // const insertResult: InsertResult = await this.userRepository.insert({ name: 'hey' });
+
+    // await update(id | conditionObject, updateData)
+
+    // await upsert... like createOrUpdate -> difficult to use, read carefully
+
+    // await repository.remove(user)
+    // await repository.remove([category1, category2, category3]);
+
+    // softRemove and recover
+
+    // await delete(id | ids[] | conditionObject)
+
+    // softDelete and restore
+
+    // count, countBy
+
+    // find, findBy, findAndCount, ...
+
+    // sum, average, minimum , maximum, ...
+
+    // query, clear, ...
+
+    // hasId, getId
+
+    // *** Query builder:
+    // const test: User[] = await this.userRepository
+    //   .createQueryBuilder('user')
+    //   .where('user.name = :name', { name: 'John' })
+    //   .getMany();
+
     return this.userRepository.save(newUser);
   }
 
