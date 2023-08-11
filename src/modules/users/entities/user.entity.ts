@@ -34,6 +34,7 @@ export class User {
   // *** Version2:
   // Không dùng quan hệ: Tận dụng khả năng lưu trữ mảng của postgres ta sẽ lưu dạng array các Permission luôn (có điều mỗi khi cập nhật thêm sửa lại có phần khó, lưu mảng các phần tử - embedding thì hơi to, mà lưu id thì k biết relation kiểu gì khi nó không phải quan hệ). Chú ý: Typeorm có hỗ trợ tạo entity chứa dạng 'simple-array' tuy nhiên bản chất cột đó sẽ thành kiểu string và các phần tử cách nhau bởi dấu ',' dẫn đến element tuyệt đối không được có dấu ','. Ngược lại Postgres có chức năng lưu mảng thực sự với kiểu 'array' -> Xem thêm: https://wanago.io/2020/11/02/api-nestjs-array-data-type-postgresql-typeorm/
   // ManyToMany theo cách thông thường của sql (MySql, ...) sẽ tạo bảng mới mapping 2 bảng này lại -> chọn cách này
+  // Demo many to many bằng cặp <Category, Question> theo link: https://typeorm.io/many-to-many-relations, https://typeorm.io/relations#jointable-options
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' }) // default no option is timestamp
   createdAt: Date;
