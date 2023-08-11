@@ -1,3 +1,4 @@
+import { Permission, PermissionActions, PermissionLevels } from '@modules/permissions/entities/permission.entity';
 import { Profile } from '@modules/profiles/entities/profile.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,19 +13,25 @@ export class UserService {
     const profile = new Profile();
     profile.gender = 'male';
     profile.photo = 'me.jpg';
+
+    const permission = new Permission();
+    permission.level = PermissionLevels.NO;
+    permission.action = PermissionActions.READ;
+
     const newUser = new User();
     newUser.name = 'Joe Smith';
     newUser.profile = profile;
+    newUser.permissions = [permission];
 
     // *** Some api: see more at https://typeorm.io/repository-api and https://typeorm.io/repository-api#additional-options
     // create instances
-    const user1 = this.userRepository.create(); // same as const user = new User();
-    const user2 = this.userRepository.create({ id: 'some-uuid-v4', name: 'hello' }); // same as const user = new User(); user.firstName = "Timber"; user.lastName = "Saw";
-    const userList = this.userRepository.create([
-      { id: 'key1', name: 'value1' },
-      { id: 'key2', name: 'value2' },
-      // ...
-    ]);
+    // const user1 = this.userRepository.create(); // same as const user = new User();
+    // const user2 = this.userRepository.create({ id: 'some-uuid-v4', name: 'hello' }); // same as const user = new User(); user.firstName = "Timber"; user.lastName = "Saw";
+    // const userList = this.userRepository.create([
+    //   { id: 'key1', name: 'value1' },
+    //   { id: 'key2', name: 'value2' },
+    //   // ...
+    // ]);
 
     // const insertResult: InsertResult = await this.userRepository.insert({ name: 'hey' });
 
@@ -75,7 +82,7 @@ export class UserService {
       // ],
       // select: ['id', 'name', 'profile', 'createdAt', 'updatedAt'], // or object<string, boolean> like relations
       // relations: ['profile'], // không nên bật cùng loadRelationIds
-      relations: { profile: true },
+      relations: { profile: true, permissions: true },
       // withDeleted: true, // mặc định là false, không lấy những phần tử softDelete/softRemove, bật true nếu vẫn lấy
 
       // order: { name: 'ASC', id: 'DESC' },

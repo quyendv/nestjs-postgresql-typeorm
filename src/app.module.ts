@@ -1,4 +1,5 @@
 import { envConfig } from '@configs/env.config';
+import { PermissionModule } from '@modules/permissions/permission.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './modules/database/database.module';
@@ -16,6 +17,7 @@ import { UserModule } from './modules/users/user.module';
     DatabaseModule,
     UserModule,
     ProfileModule,
+    PermissionModule,
   ],
 })
 export class AppModule {}
