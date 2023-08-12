@@ -1,3 +1,4 @@
+// unnecessary, split to app.config & database.config & ...
 export const envConfig = (): Record<string, any> => ({
   APP: { PORT: process.env.PORT },
   DATABASE: {

@@ -1,4 +1,4 @@
-import { Question } from '@modules/quesions/entities/question.entity';
+import { Question } from '@modules/questions/entities/question.entity';
 import {
   Column,
   CreateDateColumn,
