@@ -9,3 +9,29 @@ POST http://localhost:5000/questions
 
 ###
 GET http://localhost:5000/questions
+
+##### Employee - Clouse Table
+###
+POST http://localhost:5000/employees
+
+###
+GET http://localhost:5000/employees
+
+###
+GET http://localhost:5000/employees/roots
+
+###
+GET http://localhost:5000/employees/descendants
+
+##### TreeNested - Nested Set
+###
+POST http://localhost:5000/trees-nested
+
+###
+GET http://localhost:5000/trees-nested
+
+##### Materialized Path
+POST http://localhost:5000/materialized-paths
+
+###
+GET http://localhost:5000/materialized-paths

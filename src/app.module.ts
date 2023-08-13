@@ -1,8 +1,11 @@
 import appConfig from '@configs/app.config';
 import databaseConfig from '@configs/database.config';
 import { CategoryModule } from '@modules/categories/category.module';
+import { EmployeeModule } from '@modules/employees/employee.module';
+import { MaterializedPathModule } from '@modules/materialized-path/materialized.module';
 import { PermissionModule } from '@modules/permissions/permission.module';
 import { QuestionModule } from '@modules/questions/question.module';
+import { TreeNestedModule } from '@modules/tree-nested/tree-nested.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './modules/database/database.module';
@@ -23,6 +26,9 @@ import { UserModule } from './modules/users/user.module';
     PermissionModule,
     QuestionModule,
     CategoryModule,
+    EmployeeModule,
+    TreeNestedModule,
+    MaterializedPathModule,
   ],
 })
 export class AppModule {}
