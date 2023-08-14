@@ -54,6 +54,17 @@ export class EmployeeService {
     return /* await */ this.employeeTreeRepository.findDescendants(root[0] /*, { depth: 2 } */); // all descendants into an array 1 level
   }
 
+  async findAncestors() {
+    const employees = await this.findDescendants();
+    return this.employeeTreeRepository.findAncestors(employees[2]); // mảng các ancestor
+  }
+
+  async findDirectlyAncestor() {
+    return this.employeeRepository.findOne({ where: { id: 3 }, relations: { parent: true } });
+    // return this.employeeRepository.findOne({ where: { id: 3 }, relations: { parent: { parent: true } } }); // populate parent.parent
+    // return this.employeeRepository.findOne({ where: { id: 3 }, relations: ['parent', 'parent.parent'] }); // other way of above line
+  }
+
   /*** Others:
    * countDescendants
    * findAncestors

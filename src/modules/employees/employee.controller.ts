@@ -24,4 +24,14 @@ export class EmployeeController {
   findDescendants() {
     return this.employeeService.findDescendants();
   }
+
+  @Get('ancestors')
+  findAncestors() {
+    return this.employeeService.findAncestors();
+  }
+
+  @Get('directly-ancestor')
+  findDirectlyAncestor() {
+    return this.employeeService.findDirectlyAncestor();
+  }
 }

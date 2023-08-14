@@ -23,6 +23,12 @@ GET http://localhost:5000/employees/roots
 ###
 GET http://localhost:5000/employees/descendants
 
+###
+GET http://localhost:5000/employees/ancestors
+
+###
+GET http://localhost:5000/employees/directly-ancestor
+
 ##### TreeNested - Nested Set
 ###
 POST http://localhost:5000/trees-nested
