@@ -1,5 +1,6 @@
 import appConfig from '@configs/app.config';
 import databaseConfig from '@configs/database.config';
+import { BaseTestModule } from '@modules/base-test/base-test.module';
 import { CategoryModule } from '@modules/categories/category.module';
 import { EmployeeModule } from '@modules/employees/employee.module';
 import { MaterializedPathModule } from '@modules/materialized-path/materialized.module';
@@ -29,6 +30,7 @@ import { UserModule } from './modules/users/user.module';
     EmployeeModule,
     TreeNestedModule,
     MaterializedPathModule,
+    BaseTestModule,
   ],
 })
 export class AppModule {}

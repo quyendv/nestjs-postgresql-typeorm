@@ -12,13 +12,17 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity() // default table name is 'user', phải tự set {name: 'users'} nếu muốn
 export class User {
   @PrimaryGeneratedColumn('uuid') // default no option: number increment
   id: string;
 
   @Column()
   name: string;
+
+  // Ràng buộc unique hoặc @Unique(): https://stackoverflow.com/questions/63793417/typeorm-whats-difference-between-unique-decorator-and-unique-true-in-col
+  // @Column({ unique: true })
+  // email: string;
 
   @OneToOne(() => Profile, (profile) => profile.user, { cascade: true }) // specify inverse side as a second parameter
   @JoinColumn({
@@ -36,7 +40,7 @@ export class User {
   // ManyToMany theo cách thông thường của sql (MySql, ...) sẽ tạo bảng mới mapping 2 bảng này lại -> chọn cách này
   // Demo many to many bằng cặp <Category, Question> theo link: https://typeorm.io/many-to-many-relations, https://typeorm.io/relations#jointable-options
 
-  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' }) // default no option is timestamp
+  @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' }) // default no option is timestamp, can default: 'now()'
   createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' }) // when you change the timezone of your database server, the TIMESTAMP value stored in the database will not change automatically. (it mean TIMESTAMPTZ automatic...?)

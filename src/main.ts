@@ -11,7 +11,7 @@ async function bootstrap() {
   await app.listen(
     PORT,
     // () => console.log(`Server is running on port ${PORT}`),
-    () => Logger.debug(`Server is running on port ${PORT}`, 'main.ts'),
+    () => Logger.debug(`Server is running on port ${PORT}`, 'main.ts'), // TODO: custom logger that can custom show log by env, // TODO: fix path migration in package.json -> thường để ra ngoài src vì khi build trong dist ở ngoài hay trong src đều cùng cấp (hoặc trỏ thẳng vào dist)
   );
 }
 bootstrap();
