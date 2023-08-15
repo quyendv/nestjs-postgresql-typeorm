@@ -20,4 +20,8 @@ export class BaseTestService extends BaseService<BaseTestEntity, BaseTestReposit
   other() {
     return this.baseTestRepository.functionTest(); // dùng từ BaseTestRepository
   }
+
+  updateBaseTest(id: string) {
+    return this.updateOne(id, { someKey: 'unknown1', id: 'ae5dfd61-890b-47e8-94e3-ae30ba897d7b' });
+  }
 }

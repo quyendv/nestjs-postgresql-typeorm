@@ -50,7 +50,7 @@ export class EmployeeService {
 
   async findDescendants() {
     const root = await this.findRoots();
-
+    console.log(root[0].children); // undefined -> table chỉ có cột parentId (không có children), nếu muốn lấy children chỉ gọi findDescendants
     return /* await */ this.employeeTreeRepository.findDescendants(root[0] /*, { depth: 2 } */); // all descendants into an array 1 level
   }
 

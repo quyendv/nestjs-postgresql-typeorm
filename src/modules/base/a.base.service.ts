@@ -42,7 +42,19 @@ export abstract class BaseService<T extends BaseEntity, R extends Repository<T>>
   }
 
   async updateOne(id: EntityId, data: DeepPartial<T>): Promise<T | null> {
-    await this.repository.update(id, data as any);
+    /** TypeORM không cảnh báo cập nhật id (primary key) như mongoose (không đổi được objectId), buộc phải chặn đổi id
+     * Mặc dù thông thường ta sẽ update thông qua data ở DTO và lúc đó sẽ exclude data ra (hoặc không định nghĩa nên sẽ bị loại bỏ)
+     * Tuy nhiên một số trường hợp update gửi all lên mà không check dto (như update kahoot kèm ảnh từng làm, convert xong k lọc qua dto) dẫn đến kèm id trong hàm update
+     */
+    // C1: remove id
+    // if (data.id) {
+    //   delete data.id;
+    // }
+    // await this.repository.update(id, data as any);
+    // return this.findById(id);
+
+    // C2: change id in dataUpdate
+    await this.repository.update(id, { ...data, id } as any); // tsconfig.json check kỹ thì phải as any. (có thể gán data.id = id rồi truyền vào hàm update cũng được)
     return this.findById(id);
   }
 

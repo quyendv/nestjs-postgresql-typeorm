@@ -41,3 +41,10 @@ POST http://localhost:5000/materialized-paths
 
 ###
 GET http://localhost:5000/materialized-paths
+
+##### BaseEntity - Test BaseService
+###
+POST http://localhost:5000/base-test
+
+### 
+PATCH http://localhost:5000/base-test/ae5dfd61-890b-47e8-94e3-ae30ba897d7a
