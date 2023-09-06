@@ -6,9 +6,9 @@ export interface IBaseService<T> {
 
   createMany(data: DeepPartial<T>[]): Promise<T[]>;
 
-  findById(id: EntityId): Promise<T | null>;
+  findById(id: EntityId, options?: FindOneOptions<T>): Promise<T | null>;
 
-  findByIds(ids: EntityId[]): Promise<T[]>;
+  findByIds(ids: EntityId[], options?: FindOneOptions<T>): Promise<T[]>;
 
   findOneWithOptions(options: FindOneOptions<T>): Promise<T | null>;
 

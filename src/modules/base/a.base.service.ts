@@ -25,12 +25,14 @@ export abstract class BaseService<T extends BaseEntity> implements IBaseService<
     return this.repository.save(dataArray);
   }
 
-  findById(id: EntityId): Promise<T | null> {
-    return this.repository.findOneBy({ id } as FindOptionsWhere<T>);
+  findById(id: EntityId, options?: FindOneOptions<T>): Promise<T | null> {
+    // return this.repository.findOneBy({ id } as FindOptionsWhere<T>);
+    return this.repository.findOne({ ...options, where: { id } as FindOptionsWhere<T> });
   }
 
-  findByIds(ids: EntityId[]): Promise<T[]> {
-    return this.repository.findBy({ id: In(ids) } as FindOptionsWhere<T>);
+  findByIds(ids: EntityId[], options?: FindOneOptions<T>): Promise<T[]> {
+    // return this.repository.findBy({ id: In(ids) } as FindOptionsWhere<T>);
+    return this.repository.find({ ...options, where: { id: In(ids) } as FindOptionsWhere<T> });
   }
 
   findOneWithOptions(options: FindOneOptions<T>): Promise<T | null> {
