@@ -18,6 +18,8 @@ export interface IBaseService<T> {
 
   softDelete(id: EntityId): Promise<UpdateResult>;
 
+  restore(id: EntityId): Promise<UpdateResult>;
+
   permanentDelete(id: EntityId): Promise<DeleteResult>;
 
   // Special

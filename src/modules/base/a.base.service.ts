@@ -64,6 +64,10 @@ export abstract class BaseService<T extends BaseEntity> implements IBaseService<
     return this.repository.softDelete(id);
   }
 
+  restore(id: EntityId): Promise<UpdateResult> {
+    return this.repository.restore(id);
+  }
+
   permanentDelete(id: EntityId): Promise<DeleteResult> {
     return this.repository.delete(id);
   }
